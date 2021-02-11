@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  station:
+  stations:
     image: therhenals/thradio_stations
     build: .
     ports:
@@ -10,7 +10,14 @@ services:
       - 8010:8010
     volumes:
       - stations_data:/var/thradio/stations
+    networks:
+      - backend
 
 volumes:
   stations_data:
     name: thradio_stations_data
+
+networks:
+  backend:
+    name: thradio_backend
+    driver: bridge
